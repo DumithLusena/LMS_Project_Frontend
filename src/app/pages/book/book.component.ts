@@ -45,5 +45,4 @@ export class BookComponent {
     const book = this.allBooks.find(b => b.isbn === isbn);
     return book && book.available ? 'Yes' : 'No';
   }
-
 }

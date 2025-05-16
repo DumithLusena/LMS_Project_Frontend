@@ -25,7 +25,7 @@
           <td class="px-6 py-4">{{ user.id }}</td>
           <td class="px-6 py-4">{{ user.name }}</td>
           <td class="px-6 py-4">{{ user.email }}</td>
-          <td class="px-6 py-4">{{ user.createdAt }}</td>
+          <td class="px-6 py-4">{{ user.createdAt | date:'yyyy-MM-dd' }}</td>
         </tr>
       </tbody>
     </table>

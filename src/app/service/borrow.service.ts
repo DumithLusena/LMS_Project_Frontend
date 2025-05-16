@@ -11,20 +11,25 @@ export class BorrowService {
 
   constructor(private http: HttpClient) { }
 
-   getAll(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+   getAllBorrows(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}`);
   }
 
-  getActiveByUser(userId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/user/${userId}/active`);
+  getActiveBorrowsByUser(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/user/${userId}/active`);
   }
 
-  issueBook(data: { userId: number, isbn: string }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/issue`, data);
-  }
+   issueBook(payload: {
+      userId: number;
+      bookIsbn: string;
+      borrowedAt: string;
+      dueDate: string;
+  }): Observable<any> {
+      return this.http.post(`${this.baseUrl}/issue`, payload);
+}
 
-  returnBook(data: { userId: number, isbn: string }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/return`, data);
+  returnBook(payload: { borrowId: number; returnedAt: string }) {
+    return this.http.post(`${this.baseUrl}/return`, payload);
   }
 
 }

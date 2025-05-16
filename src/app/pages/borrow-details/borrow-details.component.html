@@ -1,0 +1,76 @@
+<div class="p-4">
+  <h2 class="text-xl font-bold mb-4">Issue Book</h2>
+
+  <div class="mb-6">
+    <input type="number" [(ngModel)]="issueForm.userId" name="userId" placeholder="User ID"
+      class="border border-gray-300 rounded px-3 py-2 mr-2" />
+
+    <input type="text" [(ngModel)]="issueForm.bookIsbn" name="bookIsbn" placeholder="Book ISBN"
+      class="border border-gray-300 rounded px-3 py-2 mr-2" />
+
+    <input type="datetime-local" [(ngModel)]="issueForm.borrowedAt" name="borrowedAt"
+      class="border border-gray-300 rounded px-3 py-2 mr-2" />
+
+    <input type="datetime-local" [(ngModel)]="issueForm.dueDate" name="dueDate"
+      class="border border-gray-300 rounded px-3 py-2 mr-2" />
+
+    <button (click)="issueBook()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+      Issue
+    </button>
+  </div>
+
+  <h2 class="text-xl font-bold mb-4">Borrow Records</h2>
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th class="px-6 py-3">ID</th>
+          <th class="px-6 py-3">User ID</th>
+          <th class="px-6 py-3">ISBN</th>
+          <th class="px-6 py-3">Issued Date</th>
+          <th class="px-6 py-3">Due Date</th>
+          <th class="px-6 py-3">Returned Date</th>
+          <th class="px-6 py-3">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let borrow of borrowList" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <td class="px-6 py-4">{{ borrow.id }}</td>
+          <td class="px-6 py-4">{{ borrow.userId }}</td>
+          <td class="px-6 py-4">{{ borrow.bookIsbn }}</td>
+          <td class="px-6 py-4">{{ borrow.borrowedAt | date:'yyyy-MM-dd HH:mm' }}</td>
+          <td class="px-6 py-4">{{ borrow.dueDate | date:'yyyy-MM-dd HH:mm' }}</td>
+          <td class="px-6 py-4">
+            {{ borrow.returnedAt ? (borrow.returnedAt | date:'yyyy-MM-dd') : 'Not Returned' }}
+          </td>
+          <td class="px-6 py-4">
+            <span [ngClass]="borrow.returnedAt ? 'text-green-600' : 'text-red-500'">
+              {{ borrow.returnedAt ? 'Returned' : 'Active' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h2 class="text-xl font-bold mb-4 mt-8">Return Book</h2>
+
+<div class="mb-6">
+  <input
+    type="number"
+    [(ngModel)]="returnForm.borrowId"
+    name="borrowId"
+    placeholder="Borrow ID"
+    class="border border-gray-300 rounded px-3 py-2 mr-2"
+  />
+
+  <button
+    (click)="returnBook()"
+    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+  >
+    Return
+  </button>
+</div>
+

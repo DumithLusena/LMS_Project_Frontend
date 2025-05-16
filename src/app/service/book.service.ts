@@ -11,15 +11,15 @@ export class BookService {
 
   constructor(private http: HttpClient) { }
 
-  getBooks(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+  getBooks(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}`);
   }
 
-  getBook(isbn: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${isbn}`);
+  getBookByIsbn(isbn: string): Observable<any> {
+    return this.http.get<any[]>(`${this.baseUrl}/${isbn}`);
   }
 
   isAvailable(isbn: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${isbn}/available`);
+    return this.http.get<any[]>(`${this.baseUrl}/${isbn}/available`);
   }
 }
